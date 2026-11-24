@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>BrandLex 演讲手卡 · XIAO Wentian</title>
+<style>
+:root {
+  --bg: #080a10;
+  --card: #131724;
+  --card-border: #272d44;
+  --text: #f5f7ff;
+  --muted: #98a2bf;
+  --accent: #958cff;
+  --accent-strong: #6e63f5;
+  --accent-soft: rgba(149, 140, 255, 0.18);
+  --amber-bg: rgba(251, 191, 36, 0.2);
+  --amber-text: #fde68a;
+  --cue-bg: #1b2033;
+  --cue-border: #363f63;
+  --hl-bg: rgba(149, 140, 255, 0.26);
+  --hl-text: #ebe8ff;
+  --btn-bg: #1c2133;
+  --font-size: 23px;
+}
+body.light {
+  --bg: #f1f4fa;
+  --card: #ffffff;
+  --card-border: #d9dfee;
+  --text: #121624;
+  --muted: #5a6480;
+  --accent: #4b43cf;
+  --accent-strong: #4b43cf;
+  --accent-soft: rgba(75, 67, 207, 0.11);
+  --amber-bg: rgba(245, 158, 11, 0.18);
+  --amber-text: #92400e;
+  --cue-bg: #f1efff;
+  --cue-border: #d5cff7;
+  --hl-bg: rgba(75, 67, 207, 0.14);
+  --hl-text: #2a2194;
+  --btn-bg: #e5e9f4;
+}
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body {
+  margin: 0; padding: 0; height: 100%; width: 100%;
+  background: var(--bg); color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", sans-serif;
+  overflow: hidden;
+}
+.app {
+  display: flex; flex-direction: column; height: 100dvh;
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.topbar {
+  flex: none; display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  padding: 10px 14px 8px; border-bottom: 1px solid var(--card-border);
+}
+.brand { display: flex; align-items: center; gap: 8px; }
+.badge {
+  padding: 5px 11px; border-radius: 999px; font-size: 14px; font-weight: 800;
+  background: var(--accent-soft); color: var(--accent); font-variant-numeric: tabular-nums;
+}
+.timer-btn {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 5px 12px; border-radius: 999px; border: 1px solid var(--card-border);
+  background: var(--btn-bg); color: var(--text); font-size: 14px; font-weight: 700;
+  font-variant-numeric: tabular-nums; cursor: pointer;
+}
+.timer-btn.running { border-color: var(--accent); color: var(--accent); }
+.tools { display: flex; align-items: center; gap: 6px; }
+.tool-btn {
+  min-width: 38px; height: 34px; padding: 0 8px; border-radius: 9px; border: 1px solid var(--card-border);
+  background: var(--btn-bg); color: var(--text); font-size: 14px; font-weight: 800;
+  cursor: pointer; display: grid; place-items: center;
+}
+.pills {
+  flex: none; display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px;
+  padding: 8px 14px;
+}
+.pill {
+  padding: 8px 0; border-radius: 11px; border: 1px solid var(--card-border);
+  background: transparent; color: var(--muted); font-size: 14px; font-weight: 800;
+  font-variant-numeric: tabular-nums; cursor: pointer; text-align: center;
+}
+.pill.active {
+  background: var(--accent-strong); border-color: var(--accent-strong); color: #fff;
+}
+.stage {
+  flex: 1; min-height: 0; overflow-y: auto; -webkit-overflow-scrolling: touch;
+  padding: 4px 14px 16px;
+}
+.card {
+  background: var(--card); border: 1px solid var(--card-border); border-radius: 22px;
+  padding: 18px 18px 26px; min-height: 100%; display: flex; flex-direction: column; gap: 16px;
+}
+.card-head {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 10px;
+  border-bottom: 1px solid var(--card-border); padding-bottom: 12px;
+}
+.card-title { margin: 0; font-size: 22px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.25; }
+.card-time { font-size: 14px; font-weight: 750; color: var(--accent); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.cue {
+  background: var(--cue-bg); border: 1px solid var(--cue-border); border-radius: 14px;
+  padding: 12px 14px; font-size: 15px; line-height: 1.6; color: var(--text);
+}
+.cue-label {
+  display: block; font-size: 12px; font-weight: 800; letter-spacing: 0.06em;
+  color: var(--accent); margin-bottom: 4px;
+}
+.cue ol { margin: 4px 0 0; padding-left: 20px; }
+.cue li { margin: 4px 0; }
+.cue a { color: var(--accent); font-weight: 750; text-decoration: underline; word-break: break-all; }
+.script {
+  display: flex; flex-direction: column; gap: 18px;
+  font-size: var(--font-size); line-height: 1.68; letter-spacing: 0.01em;
+}
+.script p { margin: 0; }
+.script .focus {
+  border-left: 4px solid var(--accent);
+  padding: 8px 0 8px 14px;
+  background: linear-gradient(90deg, var(--accent-soft), transparent);
+  border-radius: 0 12px 12px 0;
+}
+.hl {
+  background: var(--hl-bg); color: var(--hl-text);
+  padding: 2px 7px; border-radius: 7px; font-weight: 800;
+}
+.key {
+  background: var(--amber-bg); color: var(--amber-text);
+  padding: 2px 7px; border-radius: 7px; font-weight: 800;
+}
+.hint { text-align: center; font-size: 11px; color: var(--muted); padding: 2px 0 4px; }
+.nav {
+  flex: none; display: grid; grid-template-columns: 1fr 1.35fr; gap: 10px;
+  padding: 8px 14px 12px; border-top: 1px solid var(--card-border); background: var(--bg);
+}
+.nav-btn {
+  height: 54px; border-radius: 15px; border: 1px solid var(--card-border);
+  background: var(--btn-bg); color: var(--text); font-size: 17px; font-weight: 800;
+  cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px;
+}
+.nav-btn.primary {
+  background: var(--accent-strong); border-color: var(--accent-strong); color: #fff;
+}
+.nav-btn:disabled { opacity: 0.32; }
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="brand">
+      <span class="badge" id="slide-badge">01 / 06</span>
+      <button type="button" class="timer-btn" id="timer-btn" aria-label="计时器">▶ 00:00</button>
+    </div>
+    <div class="tools">
+      <button type="button" class="tool-btn" id="font-down" aria-label="缩小字号">A-</button>
+      <button type="button" class="tool-btn" id="font-up" aria-label="放大字号">A+</button>
+      <button type="button" class="tool-btn" id="theme-btn" aria-label="切换深浅色">☀︎</button>
+    </div>
+  </header>
+
+  <nav class="pills" id="pills" aria-label="手卡导航"></nav>
+
+  <main class="stage" id="stage">
+    <article class="card" id="card"></article>
+  </main>
+
+  <div class="hint">左右滑动翻卡 · 点左上角计时（双击归零 · 目标 5:30）</div>
+  <footer class="nav">
+    <button type="button" class="nav-btn" id="prev-btn">← 上一张</button>
+    <button type="button" class="nav-btn primary" id="next-btn">下一张 →</button>
+  </footer>
+</div>
+
+<script>
+const CARDS = [
+  {
+    slide: 1,
+    title: "开场故事 · 为什么做 BrandLex",
+    time: "00:00 – 01:00",
+    cue: "停在 Slide 1 封面自然开场；讲到「不是翻译，而是优化」时稍微停顿加重。",
+    paragraphs: [
+      { text: "我们的 final project 叫 <span class='hl'>BrandLex</span>，基于 <span class='hl'>Topic 2</span> 来进行的设计和实施。" },
+      { text: "BrandLex 是什么？它是一个围绕我们收集的两文三语 marketing 词库、跨市场表达方式来做的一个网站工具，是一个具备让市场人员从日常学习、刷灵感，到文案本地化智能优化（注意，<span class='key'>不是翻译，而是优化</span>）的平台。", focus: true },
+      { text: "为什么我们会选这个方向？其实有两个契机：" },
+      { text: "<span class='hl'>第一</span>，我们发现做跨境或者大湾区营销，很容易踩本地表达坑——想要在三地宣发一个产品，用词完全不是一回事；比如，直接拿简繁转换会穿帮，丢给普通 AI 写又容易写成僵硬的直译腔，同一个词今天这样翻、明天那样翻，品牌调性全散了。" },
+      { text: "<span class='hl'>第二</span>，这其实也是我们把上学期萧老师那门 <span class='key'>Localisation and Bilingual Web Development</span>，和这学期课程结合起来的一次尝试——把双语网页本地化的底子，加上 AI 和 NLP 营销工具，做成一个真的能打开就用的工作台。" }
+    ]
+  },
+  {
+    slide: 2,
+    title: "三个案例 · 本土化表达差异",
+    time: "01:00 – 01:55",
+    cue: "依次指向屏幕上三行对照，每讲完一组停顿 1 秒，让老师和同学扫一眼屏幕。",
+    paragraphs: [
+      { text: "痛点是什么呢，我们来看这三个例子：" },
+      { text: "<span class='hl'>第一个，「包邮」</span>，内地电商天天用，但你原封不动搬到香港，本地用户一眼就觉得怪，香港商业语境习惯说 <span class='key'>「免運費」</span>，英文就是 Free Shipping。" },
+      { text: "<span class='hl'>第二个</span>，小红书最爱说的 <span class='hl'>「种草」</span>，在香港 IG 语境里更自然的是 <span class='key'>「好物推介」</span>，英文叫 Product Seeding。" },
+      { text: "<span class='hl'>第三个</span>，活动促销里的 <span class='hl'>「早鸟福利」</span>，内地偏直给实惠，香港品牌更讲究礼遇感，会写成 <span class='key'>「早鳥禮遇」</span>，英文对应 Early-Bird Offer。" },
+      { text: "大家可以看到，这不是换几个繁体字的事，而是背后一整套 <span class='key'>市场语感和消费习惯</span> 的切换。", focus: true }
+    ]
+  },
+  {
+    slide: 3,
+    title: "产品定位 · 三个核心特性",
+    time: "01:55 – 02:50",
+    cue: "从左到右扫过 3 张卡片，重点抛出「轻量级 AI Harness」给 Slide 5 埋伏笔。",
+    paragraphs: [
+      { text: "那 BrandLex 到底帮 marketing 人员解决什么问题？我们整体做了三个特性：" },
+      { text: "<span class='hl'>第一个「首页」</span>，就是门面和快速体验区，进来几秒钟就能看懂一稿三地怎么变，很简单。" },
+      { text: "<span class='hl'>第二个「文案改写」</span>，解决的是写稿慢、AI 容易胡乱发挥的问题——它先把你的文案和词库做 <span class='hl'>RAG 检索</span>，再结合系统提示词路由到 DeepSeek 去改写，这是一个 <span class='key'>轻量级的 AI Harness</span> 做法，约束稳定、可靠输出。", focus: true },
+      { text: "<span class='hl'>第三个「学习」</span>，解决的是传统 Excel 术语表、字典根本没人愿意翻的痛点——我们把 <span class='hl'>3,208 组</span> 三语表达做成卡片流，没事刷一刷，带着例句和避坑提醒，查词的同时直接学会怎么用。" }
+    ]
+  },
+  {
+    slide: 4,
+    title: "实机演示 · 线上网站点一点",
+    time: "02:50 – 03:55",
+    cueHtml: "<span class='cue-label'>实机点击路径（提前开好标签页）</span><ol><li>切到浏览器：<a href='https://ethanhotline.pythonanywhere.com/' target='_blank' rel='noopener'>ethanhotline.pythonanywhere.com</a></li><li>轻轻晃动鼠标带过首页大标题，视线落到下方互动预览窗</li><li>点 <b>HK 香港繁中</b>，依次指底部 3 枚改动标签</li><li>依次点 <b>CN 内地简中</b> 和 <b>EN English</b>（各停 2 秒）</li><li>切回 PPT 第 5 页</li></ol>",
+    paragraphs: [
+      { text: "我们直接切到真实线上部署的环境上来体验一下。" },
+      { text: "页面整体也很简洁舒服。" },
+      { text: "大家看下面这个互动预览窗，上面是一条很典型的活动原稿：LUMA 联名香氛礼盒上线，11 月 15 至 17 日预订享早鸟福利 HK$280，香港包邮。" },
+      { text: "我现在点一下 <span class='key'>「HK 香港繁中」</span>，大家看下面标出来的三处改动：联名换成了 <span class='hl'>「跨界聯乘」</span>，早鸟福利换成了 <span class='hl'>「早鳥禮遇」</span>，包邮换成了 <span class='hl'>「免運費」</span>，整段读起来马上就是香港品牌的口吻。", focus: true },
+      { text: "再切到 <span class='hl'>「CN 内地简中」</span> 和 <span class='hl'>「EN English」</span>，同一条简报，三地风格一眼对比得很清楚。" },
+      { text: "具体的功能我留给后面队友演示，我先切回 PPT 讲一下背后的技术架构。" }
+    ]
+  },
+  {
+    slide: 5,
+    title: "技术架构 · AI Harness 与算力分层",
+    time: "03:55 – 04:55",
+    cue: "按「核心思路 → 左：数据与检索 → 右：云端改写 → 下：交付层」四步指图讲，语速稳健。",
+    paragraphs: [
+      { text: "在整体的技术架构上，刚才我提到了 <span class='key'>AI Harness</span> 的概念，我做架构的时候也是基于这个思维来设计和优化我们的架构。" },
+      { text: "核心思路是：<span class='key'>算力分层、职责解耦</span>。", focus: true },
+      { text: "<span class='hl'>左边这里是数据层</span>，用 <span class='hl'>SQLite 事务</span> 加 <span class='hl'>JSON 原子快照</span> 做双写；检索层我们摒弃全文模糊扫描，而是针对两个场景分别写了数据结构：查词走 <span class='key'>1/2-Gram 倒排索引</span>，整段原稿扫词走 <span class='key'>AC 自动机</span>，一次扫描就能把命中词条全部抓出来，响应压在毫秒级。" },
+      { text: "<span class='hl'>再看右边</span>，拿到命中的词库约束后，才调用 <span class='hl'>DeepSeek API</span> 做三地风格改写，风格化的部分我们也是通过系统提示词的方式来实现。" },
+      { text: "<span class='hl'>下面交付层</span>也很干净：后端是标准 <span class='hl'>Python Flask WSGI</span>，前端没套臃肿框架，纯原生 <span class='hl'>Vanilla JS</span> 单页应用，零构建依赖，打开即用。" }
+    ]
+  },
+  {
+    slide: 6,
+    title: "数据规模 · 移交下一位同学",
+    time: "04:55 – 05:30",
+    cue: "停在 3,208 大数字画面，说完最后一句微笑看向下一位同学（ZHAO Boxin）自然交棒。",
+    paragraphs: [
+      { text: "目前我们整个系统里，已经内置了 <span class='key'>3,208 条</span> 横跨 <span class='hl'>12 个</span> 营销领域的词库，当然，基于我们的维护模式设计，词库还能不断增加、优化。" },
+      { text: "这三千多条词到底怎么建出来的？我们又是怎么做到毫秒级精准检索、不误伤缩写的？<span class='key'>接下来让下一位同学来介绍。</span>", focus: true }
+    ]
+  }
+];
+
+let idx = 0;
+let fontSize = 23;
+let timerSec = 0;
+let timerId = null;
+
+const stage = document.getElementById('stage');
+const cardEl = document.getElementById('card');
+const pillsEl = document.getElementById('pills');
+const badgeEl = document.getElementById('slide-badge');
+const prevBtn = document.getElementById('prev-btn');
+const nextBtn = document.getElementById('next-btn');
+const timerBtn = document.getElementById('timer-btn');
+
+CARDS.forEach((c, i) => {
+  const b = document.createElement('button');
+  b.type = 'button';
+  b.className = 'pill';
+  b.textContent = String(c.slide).padStart(2, '0');
+  b.addEventListener('click', () => go(i));
+  pillsEl.appendChild(b);
+});
+
+function render() {
+  const c = CARDS[idx];
+  badgeEl.textContent = `${String(c.slide).padStart(2, '0')} / ${String(CARDS.length).padStart(2, '0')}`;
+  Array.from(pillsEl.children).forEach((el, i) => el.classList.toggle('active', i === idx));
+  prevBtn.disabled = idx === 0;
+  nextBtn.disabled = idx === CARDS.length - 1;
+  nextBtn.textContent = idx === CARDS.length - 1 ? "完成 · 交棒 ✓" : "下一张 →";
+
+  const cueBlock = c.cueHtml
+    ? `<div class="cue">${c.cueHtml}</div>`
+    : `<div class="cue"><span class="cue-label">画面与节奏提示</span>${c.cue}</div>`;
+
+  const paras = c.paragraphs.map(p =>
+    `<p class="${p.focus ? 'focus' : ''}">${p.text}</p>`
+  ).join('');
+
+  cardEl.innerHTML = `
+    <div class="card-head">
+      <h1 class="card-title">${c.title}</h1>
+      <span class="card-time">${c.time}</span>
+    </div>
+    ${cueBlock}
+    <div class="script">${paras}</div>
+  `;
+  stage.scrollTop = 0;
+}
+
+function go(nextIdx) {
+  idx = Math.max(0, Math.min(CARDS.length - 1, nextIdx));
+  render();
+}
+
+prevBtn.addEventListener('click', () => go(idx - 1));
+nextBtn.addEventListener('click', () => go(idx + 1));
+
+let touchX = 0, touchY = 0;
+stage.addEventListener('touchstart', e => {
+  touchX = e.changedTouches[0].clientX;
+  touchY = e.changedTouches[0].clientY;
+}, { passive: true });
+stage.addEventListener('touchend', e => {
+  const dx = e.changedTouches[0].clientX - touchX;
+  const dy = e.changedTouches[0].clientY - touchY;
+  if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.35) {
+    if (dx < 0 && idx < CARDS.length - 1) go(idx + 1);
+    else if (dx > 0 && idx > 0) go(idx - 1);
+  }
+}, { passive: true });
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); go(idx + 1); }
+  if (e.key === 'ArrowLeft') { e.preventDefault(); go(idx - 1); }
+});
+
+function setFont(sz) {
+  fontSize = Math.max(18, Math.min(34, sz));
+  document.documentElement.style.setProperty('--font-size', fontSize + 'px');
+}
+document.getElementById('font-down').addEventListener('click', () => setFont(fontSize - 2));
+document.getElementById('font-up').addEventListener('click', () => setFont(fontSize + 2));
+
+const themeBtn = document.getElementById('theme-btn');
+themeBtn.addEventListener('click', () => {
+  const isLight = document.body.classList.toggle('light');
+  themeBtn.textContent = isLight ? '☾' : '☀︎';
+});
+
+function fmt(s) {
+  return `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`;
+}
+let lastTap = 0;
+timerBtn.addEventListener('click', () => {
+  const now = Date.now();
+  if (now - lastTap < 350) {
+    clearInterval(timerId); timerId = null; timerSec = 0;
+    timerBtn.classList.remove('running');
+    timerBtn.textContent = '▶ 00:00';
+    lastTap = 0;
+    return;
+  }
+  lastTap = now;
+  if (timerId) {
+    clearInterval(timerId); timerId = null;
+    timerBtn.classList.remove('running');
+    timerBtn.textContent = `▶ ${fmt(timerSec)}`;
+  } else {
+    timerBtn.classList.add('running');
+    timerBtn.textContent = `⏸ ${fmt(timerSec)}`;
+    timerId = setInterval(() => {
+      timerSec += 1;
+      timerBtn.textContent = `⏸ ${fmt(timerSec)}`;
+    }, 1000);
+  }
+});
+
+async function keepAwake() {
+  try {
+    if ('wakeLock' in navigator) await navigator.wakeLock.request('screen');
+  } catch (_) {}
+}
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible') keepAwake();
+});
+keepAwake();
+
+render();
+</script>
+</body>
+</html>

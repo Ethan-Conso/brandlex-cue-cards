@@ -2,179 +2,100 @@
 <html lang="zh-Hans">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>BrandLex 演讲手卡 · XIAO Wentian</title>
+<meta name="theme-color" content="#141615">
+<meta name="description" content="BrandLex 六页演讲手稿，适配 iPhone Duo 展开内屏。">
+<title>BrandLex · 演讲手稿</title>
+<!-- Design craft informed by unslop, Damir Sokolovsky, CC BY 4.0: https://github.com/Dammyjay93/unslop -->
 <style>
-:root {
-  --bg: #080a10;
-  --card: #131724;
-  --card-border: #272d44;
-  --text: #f5f7ff;
-  --muted: #98a2bf;
-  --accent: #958cff;
-  --accent-strong: #6e63f5;
-  --accent-soft: rgba(149, 140, 255, 0.18);
-  --amber-bg: rgba(251, 191, 36, 0.2);
-  --amber-text: #fde68a;
-  --cue-bg: #1b2033;
-  --cue-border: #363f63;
-  --hl-bg: rgba(149, 140, 255, 0.26);
-  --hl-text: #ebe8ff;
-  --btn-bg: #1c2133;
-  --font-size: 23px;
-}
-body.light {
-  --bg: #f1f4fa;
-  --card: #ffffff;
-  --card-border: #d9dfee;
-  --text: #121624;
-  --muted: #5a6480;
-  --accent: #4b43cf;
-  --accent-strong: #4b43cf;
-  --accent-soft: rgba(75, 67, 207, 0.11);
-  --amber-bg: rgba(245, 158, 11, 0.18);
-  --amber-text: #92400e;
-  --cue-bg: #f1efff;
-  --cue-border: #d5cff7;
-  --hl-bg: rgba(75, 67, 207, 0.14);
-  --hl-text: #2a2194;
-  --btn-bg: #e5e9f4;
-}
-* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-html, body {
-  margin: 0; padding: 0; height: 100%; width: 100%;
-  background: var(--bg); color: var(--text);
-  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", sans-serif;
-  overflow: hidden;
-}
-.app {
-  display: flex; flex-direction: column; height: 100dvh;
-  padding-top: env(safe-area-inset-top);
-  padding-bottom: env(safe-area-inset-bottom);
-}
-.topbar {
-  flex: none; display: flex; align-items: center; justify-content: space-between; gap: 8px;
-  padding: 10px 14px 8px; border-bottom: 1px solid var(--card-border);
-}
-.brand { display: flex; align-items: center; gap: 8px; }
-.badge {
-  padding: 5px 11px; border-radius: 999px; font-size: 14px; font-weight: 800;
-  background: var(--accent-soft); color: var(--accent); font-variant-numeric: tabular-nums;
-}
-.timer-btn {
-  display: inline-flex; align-items: center; gap: 5px;
-  padding: 5px 12px; border-radius: 999px; border: 1px solid var(--card-border);
-  background: var(--btn-bg); color: var(--text); font-size: 14px; font-weight: 700;
-  font-variant-numeric: tabular-nums; cursor: pointer;
-}
-.timer-btn.running { border-color: var(--accent); color: var(--accent); }
-.tools { display: flex; align-items: center; gap: 6px; }
-.tool-btn {
-  min-width: 38px; height: 34px; padding: 0 8px; border-radius: 9px; border: 1px solid var(--card-border);
-  background: var(--btn-bg); color: var(--text); font-size: 14px; font-weight: 800;
-  cursor: pointer; display: grid; place-items: center;
-}
-.pills {
-  flex: none; display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px;
-  padding: 8px 14px;
-}
-.pill {
-  padding: 8px 0; border-radius: 11px; border: 1px solid var(--card-border);
-  background: transparent; color: var(--muted); font-size: 14px; font-weight: 800;
-  font-variant-numeric: tabular-nums; cursor: pointer; text-align: center;
-}
-.pill.active {
-  background: var(--accent-strong); border-color: var(--accent-strong); color: #fff;
-}
-.stage {
-  flex: 1; min-height: 0; overflow-y: auto; -webkit-overflow-scrolling: touch;
-  padding: 4px 14px 16px;
-}
-.card {
-  background: var(--card); border: 1px solid var(--card-border); border-radius: 22px;
-  padding: 18px 18px 26px; min-height: 100%; display: flex; flex-direction: column; gap: 16px;
-}
-.card-head {
-  display: flex; align-items: baseline; justify-content: space-between; gap: 10px;
-  border-bottom: 1px solid var(--card-border); padding-bottom: 12px;
-}
-.card-title { margin: 0; font-size: 22px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.25; }
-.card-time { font-size: 14px; font-weight: 750; color: var(--accent); white-space: nowrap; font-variant-numeric: tabular-nums; }
-.cue {
-  background: var(--cue-bg); border: 1px solid var(--cue-border); border-radius: 14px;
-  padding: 12px 14px; font-size: 15px; line-height: 1.6; color: var(--text);
-}
-.cue-label {
-  display: block; font-size: 12px; font-weight: 800; letter-spacing: 0.06em;
-  color: var(--accent); margin-bottom: 4px;
-}
-.cue ol { margin: 4px 0 0; padding-left: 20px; }
-.cue li { margin: 4px 0; }
-.cue a { color: var(--accent); font-weight: 750; text-decoration: underline; word-break: break-all; }
-.script {
-  display: flex; flex-direction: column; gap: 18px;
-  font-size: var(--font-size); line-height: 1.68; letter-spacing: 0.01em;
-}
-.script p { margin: 0; }
-.script .focus {
-  border-left: 4px solid var(--accent);
-  padding: 8px 0 8px 14px;
-  background: linear-gradient(90deg, var(--accent-soft), transparent);
-  border-radius: 0 12px 12px 0;
-}
-.hl {
-  background: var(--hl-bg); color: var(--hl-text);
-  padding: 2px 7px; border-radius: 7px; font-weight: 800;
-}
-.key {
-  background: var(--amber-bg); color: var(--amber-text);
-  padding: 2px 7px; border-radius: 7px; font-weight: 800;
-}
-.hint { text-align: center; font-size: 11px; color: var(--muted); padding: 2px 0 4px; }
-.nav {
-  flex: none; display: grid; grid-template-columns: 1fr 1.35fr; gap: 10px;
-  padding: 8px 14px 12px; border-top: 1px solid var(--card-border); background: var(--bg);
-}
-.nav-btn {
-  height: 54px; border-radius: 15px; border: 1px solid var(--card-border);
-  background: var(--btn-bg); color: var(--text); font-size: 17px; font-weight: 800;
-  cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px;
-}
-.nav-btn.primary {
-  background: var(--accent-strong); border-color: var(--accent-strong); color: #fff;
-}
-.nav-btn:disabled { opacity: 0.32; }
+:root{color-scheme:dark;--bg:#141615;--panel:#1b1e1c;--raised:#242825;--line:#363c37;--text:#eeefe9;--muted:#a3aca4;--accent:#bed5b2;--accent-bg:#293328;--key:#e5cc9f;--font-size:28px}
+body.light{color-scheme:light;--bg:#faf9f5;--panel:#f0f0e9;--raised:#e7e8df;--line:#d2d6cc;--text:#20271f;--muted:#5f6a5b;--accent:#3a602b;--accent-bg:#e4eddd;--key:#805619}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(--text)}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;-webkit-text-size-adjust:100%}
+button,input{font:inherit}button,a{-webkit-touch-callout:none}button{cursor:pointer;touch-action:manipulation;color:inherit}
+button{border:1px solid var(--line);background:transparent;border-radius:10px;min-height:48px;padding:8px 16px;font-size:15px;font-weight:500}
+button:active{background:var(--raised)}button:disabled{opacity:.35;cursor:default}button:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+button svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.app{height:100%;height:100dvh;display:grid;grid-template-rows:auto minmax(0,1fr) auto;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:68px;padding:8px 24px;border-bottom:1px solid var(--line)}
+.wordmark{font-size:18px;font-weight:600;display:flex;align-items:center;gap:12px}.wordmark span{font-size:13px;color:var(--muted);font-weight:400;border-left:1px solid var(--line);padding-left:12px}
+.clock{display:flex;align-items:center;gap:12px;font-variant-numeric:tabular-nums}.timer{display:flex;align-items:center;gap:8px;min-width:128px;justify-content:center;border-color:transparent;background:var(--panel)}
+.timer time{font-size:23px;font-weight:500;letter-spacing:.02em}.timer.running{color:var(--accent);background:var(--accent-bg)}.clock-goal{font-size:12px;color:var(--muted)}
+.settings-trigger{display:flex;gap:8px;align-items:center;border-color:transparent;color:var(--muted)}
+.workspace{display:grid;grid-template-columns:224px minmax(0,1fr);min-height:0;min-width:0}
+.sidebar{background:var(--panel);border-right:1px solid var(--line);padding:24px 16px;overflow-y:auto;overscroll-behavior:contain}
+.sidebar-label{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:13px;margin:0 8px 16px}.sidebar-label span{font-variant-numeric:tabular-nums}
+.outline{display:grid;gap:4px}.outline button{display:flex;align-items:center;gap:12px;text-align:left;border-color:transparent;padding:10px 12px;border-radius:8px;font-size:15px;min-height:48px}.outline .num{font-size:12px;font-variant-numeric:tabular-nums;color:var(--muted)}
+.outline button[aria-current="step"]{background:var(--accent-bg);color:var(--accent)}.outline button[aria-current="step"] .num{color:var(--accent)}
+.cue-panel{border-top:1px solid var(--line);margin:24px 8px 0;padding-top:20px}.cue-heading{margin:0 0 12px;color:var(--muted);font-size:13px;font-weight:400;display:flex;align-items:center;gap:8px}.cue-heading::before{content:"";width:3px;height:12px;background:var(--accent);border-radius:2px}
+.cue-content{font-size:14px;line-height:1.8;color:var(--muted);overflow-wrap:anywhere}.cue-content ol{padding-left:18px;margin:0}.cue-content li+li{margin-top:8px}.cue-content a{color:var(--accent);text-underline-offset:3px}.cue-content .cue-label{display:block;margin-bottom:8px}.cue-content b{font-weight:500;color:var(--text)}
+.reader{min-height:0;min-width:0;display:grid;grid-template-rows:auto minmax(0,1fr)}
+.card-header{padding:24px 32px 16px;display:flex;gap:16px;align-items:start;justify-content:space-between}.card-kicker{display:flex;align-items:center;gap:10px;font-size:12px;color:var(--muted);margin-bottom:8px;font-variant-numeric:tabular-nums}.card-kicker .divider{width:20px;height:1px;background:var(--line)}
+h1{font-size:24px;line-height:1.4;font-weight:500;margin:0;letter-spacing:.01em}.card-time{display:block;font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap;padding-top:3px}
+.mobile-cue{display:none;padding:0 20px 12px;font-size:13px;color:var(--muted)}.mobile-cue summary{cursor:pointer;min-height:44px;padding:12px 0}.mobile-cue .cue-content{padding:4px 0 12px;max-height:32vh;overflow-y:auto}
+.stage{overflow-y:auto;overflow-x:hidden;min-height:0;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:var(--line) transparent;scroll-padding-top:20px;touch-action:pan-y pinch-zoom;-webkit-overflow-scrolling:touch}
+.script{max-width:880px;margin:0 auto;padding:4px 32px 32vh 56px;font-size:var(--font-size);line-height:1.8;letter-spacing:.02em;overflow-wrap:anywhere}
+.paragraph{position:relative;margin:0 0 32px;padding:0 0 0 4px;transition:color .16s}.paragraph::before{content:attr(data-number);position:absolute;left:-28px;top:5px;font-size:11px;line-height:2;color:var(--muted);font-variant-numeric:tabular-nums;letter-spacing:0}.paragraph.current::before{color:var(--accent)}.paragraph.current::after{content:"";position:absolute;left:-28px;top:32px;bottom:4px;min-height:16px;width:2px;background:var(--accent);border-radius:2px}
+.hl{color:var(--text);font-weight:600}.key{color:var(--key);font-weight:600}.script .focus{color:var(--text)}.script p:last-child{margin-bottom:0}
+.end-note{font-size:14px;letter-spacing:0;color:var(--muted);margin-top:32px;border-top:1px solid var(--line);padding-top:20px;line-height:1.7}
+.footer{min-height:80px;border-top:1px solid var(--line);display:grid;grid-template-columns:224px 1fr;background:var(--bg)}.footer-context{display:flex;align-items:center;gap:8px;padding:12px 24px;border-right:1px solid var(--line);font-size:12px;color:var(--muted)}.awake-indicator{width:6px;height:6px;background:var(--muted);border-radius:50%;flex:none}.awake-indicator.on{background:var(--accent)}
+.controls{display:flex;align-items:center;gap:12px;padding:12px 24px}.page-control{display:flex;align-items:center;gap:8px;flex:1;min-width:0}.page-control>button{display:flex;align-items:center;gap:8px}.page-info{color:var(--muted);font-size:12px;padding-left:4px;white-space:nowrap;font-variant-numeric:tabular-nums}.read-progress{height:2px;background:var(--line);width:48px;display:inline-block;vertical-align:middle;margin-right:8px;overflow:hidden}.read-progress span{display:block;height:100%;background:var(--accent);width:100%;transform:scaleX(0);transform-origin:left}
+.primary{display:flex;align-items:center;justify-content:center;gap:16px;min-width:176px;background:var(--accent);border-color:var(--accent);color:#172014;font-size:17px;min-height:52px}.light .primary{color:#fff}.primary:active{background:var(--accent);filter:brightness(.92)}.page-control>.mobile-pages{display:none}.icon-button{display:flex;align-items:center;justify-content:center;padding:8px 12px;min-width:48px}
+.dialog{color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:20px;width:min(460px,calc(100vw - 24px));max-height:calc(100dvh - 32px);padding:24px;overflow-y:auto}.dialog::backdrop{background:#0009}.dialog-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}.dialog h2{margin:0;font-size:20px;font-weight:500}.dialog label,.setting-label{display:block;font-size:14px;color:var(--muted);margin-bottom:12px}.setting{margin-bottom:24px}.setting:last-child{margin-bottom:0}.stepper{display:grid;grid-template-columns:1fr 72px 1fr;align-items:center;gap:12px}.stepper output{text-align:center;font-variant-numeric:tabular-nums;font-size:18px}.choices{display:flex;gap:8px}.choices button{flex:1}.choices button[aria-pressed="true"]{border-color:var(--accent);color:var(--accent);background:var(--accent-bg)}.setting-note{margin:12px 0 0;color:var(--muted);font-size:12px;line-height:1.7}.reset{width:100%;color:var(--muted)}.start-over{width:100%;margin-top:12px}.dialog .outline{margin-top:8px}.dialog .outline button{font-size:17px;min-height:56px}.toast{position:fixed;left:50%;bottom:calc(100px + env(safe-area-inset-bottom));transform:translateX(-50%);background:var(--raised);color:var(--text);border:1px solid var(--line);padding:12px 16px;border-radius:10px;font-size:13px;max-width:calc(100vw - 32px);z-index:9;line-height:1.5;pointer-events:none}.toast:empty{display:none}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(min-width:1200px){.workspace{grid-template-columns:256px minmax(0,1fr)}.footer{grid-template-columns:256px 1fr}.sidebar{padding:32px 20px}.card-header{max-width:960px;width:100%;margin:0 auto;padding-top:32px}.script{padding-top:12px}}
+@media(max-width:759px){.topbar{min-height:60px;padding:6px 16px}.wordmark span,.clock-goal,.settings-trigger span{display:none}.wordmark{font-size:16px}.clock{gap:0}.timer{min-width:112px}.timer time{font-size:22px}.settings-trigger{padding:8px 12px}.workspace{display:block}.sidebar{display:none}.reader{height:100%}.card-header{padding:20px 20px 12px;display:block}.card-time{margin-top:8px}h1{font-size:22px}.mobile-cue{display:block}.script{padding:4px 24px 28vh 44px;line-height:1.75}.paragraph{margin-bottom:28px}.paragraph::before{left:-24px}.paragraph.current::after{left:-24px}.footer{display:block;min-height:76px}.footer-context{display:none}.controls{padding:10px 16px;gap:8px}.page-control{gap:8px;flex:1}.prev-label{display:none}.page-info{display:none}.page-info .read-progress{display:none}.primary{min-width:140px;gap:8px;flex:1;font-size:16px}.page-control>.mobile-pages{display:flex}.mobile-pages span{font-size:13px;font-variant-numeric:tabular-nums}.mobile-pages svg{width:16px}.dialog{padding:20px}}
+@media(max-height:500px){.topbar{min-height:52px}.card-header{padding-top:12px;padding-bottom:8px}.card-kicker{margin-bottom:4px}.footer{min-height:64px}.controls{padding-top:6px;padding-bottom:6px}.sidebar{padding-top:12px}.cue-panel{margin-top:12px;padding-top:12px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
 </style>
 </head>
 <body>
 <div class="app">
   <header class="topbar">
-    <div class="brand">
-      <span class="badge" id="slide-badge">01 / 06</span>
-      <button type="button" class="timer-btn" id="timer-btn" aria-label="计时器">▶ 00:00</button>
+    <div class="wordmark">BrandLex <span>演讲手稿</span></div>
+    <div class="clock">
+      <button type="button" class="timer" id="timer-btn" aria-label="开始演讲计时"><svg id="timer-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 10 7-10 7Z"/></svg><time id="timer-value">00:00</time></button>
+      <span class="clock-goal" id="clock-goal">目标 05:30</span>
     </div>
-    <div class="tools">
-      <button type="button" class="tool-btn" id="font-down" aria-label="缩小字号">A-</button>
-      <button type="button" class="tool-btn" id="font-up" aria-label="放大字号">A+</button>
-      <button type="button" class="tool-btn" id="theme-btn" aria-label="切换深浅色">☀︎</button>
-    </div>
+    <button type="button" class="settings-trigger" id="settings-btn" aria-label="阅读设置"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 17h16M8 4v6m8 4v6"/></svg><span>阅读设置</span></button>
   </header>
-
-  <nav class="pills" id="pills" aria-label="手卡导航"></nav>
-
-  <main class="stage" id="stage">
-    <article class="card" id="card"></article>
-  </main>
-
-  <div class="hint">左右滑动翻卡 · 点左上角计时（双击归零 · 目标 5:30）</div>
-  <footer class="nav">
-    <button type="button" class="nav-btn" id="prev-btn">← 上一张</button>
-    <button type="button" class="nav-btn primary" id="next-btn">下一张 →</button>
+  <div class="workspace">
+    <aside class="sidebar" aria-label="演讲提纲与提示">
+      <div class="sidebar-label">演讲提纲 <span>6 张 · 5 分 30 秒</span></div>
+      <nav class="outline" id="outline" aria-label="手卡导航"></nav>
+      <section class="cue-panel"><h2 class="cue-heading">画面与节奏</h2><div class="cue-content" id="desktop-cue"></div></section>
+    </aside>
+    <main class="reader" aria-label="当前演讲稿">
+      <div>
+        <header class="card-header"><div><div class="card-kicker"><span id="slide-badge">01 / 06</span><span class="divider"></span><span id="paragraph-count">第 1 / 5 段</span></div><h1 id="card-title"></h1></div><span class="card-time" id="card-time"></span></header>
+        <details class="mobile-cue" id="mobile-cue"><summary>画面与节奏提示</summary><div class="cue-content" id="mobile-cue-content"></div></details>
+      </div>
+      <div class="stage" id="stage" tabindex="0" aria-label="演讲稿正文，可向下滚动"><article class="script" id="script"></article></div>
+    </main>
+  </div>
+  <footer class="footer">
+    <div class="footer-context"><span class="awake-indicator" id="awake-dot"></span><span id="awake-status">开始计时后保持亮屏</span></div>
+    <div class="controls">
+      <div class="page-control">
+        <button type="button" class="icon-button" id="prev-btn" aria-label="上一张"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg><span class="prev-label">上一张</span></button>
+        <button type="button" class="mobile-pages" id="pages-btn" aria-label="打开演讲提纲"><span id="mobile-page">01 / 06</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7 10 5 5 5-5"/></svg></button>
+        <span class="page-info"><span class="read-progress" aria-hidden="true"><span id="read-progress"></span></span><span id="read-label">本张进度 0%</span></span>
+      </div>
+      <button type="button" class="primary" id="continue-btn"><span id="continue-label">继续读</span><svg viewBox="0 0 24 24" aria-hidden="true"><path id="continue-icon" d="M12 4v16m-6-6 6 6 6-6"/></svg></button>
+    </div>
   </footer>
 </div>
-
+<dialog class="dialog" id="settings-dialog" aria-labelledby="settings-title">
+  <div class="dialog-head"><h2 id="settings-title">阅读设置</h2><button type="button" class="icon-button" data-close="settings-dialog" aria-label="关闭阅读设置">关闭</button></div>
+  <div class="setting"><span class="setting-label">正文字号</span><div class="stepper"><button type="button" id="font-down" aria-label="缩小字号">A−</button><output id="font-value">28</output><button type="button" id="font-up" aria-label="放大字号">A＋</button></div></div>
+  <div class="setting"><span class="setting-label">阅读外观</span><div class="choices"><button type="button" id="dark-theme" aria-pressed="true">深色</button><button type="button" id="light-theme" aria-pressed="false">纸白</button></div></div>
+  <div class="setting"><button type="button" class="reset" id="reset-timer">重置计时</button><button type="button" class="start-over" id="start-over">从第一张重新开始</button><p class="setting-note">点正文可标记读到的段落。阅读位置、字号和外观会自动保存。底部「继续读」向下翻动，读完本张后进入下一张。</p></div>
+</dialog>
+<dialog class="dialog" id="pages-dialog" aria-labelledby="pages-title"><div class="dialog-head"><h2 id="pages-title">演讲提纲</h2><button type="button" class="icon-button" data-close="pages-dialog" aria-label="关闭演讲提纲">关闭</button></div><nav class="outline" id="mobile-outline" aria-label="跳转手卡"></nav></dialog>
+<div class="toast" id="toast" role="status"></div>
+<div class="sr-only" id="page-announcement" aria-live="polite"></div>
 <script>
 const CARDS = [
   {
@@ -253,135 +174,297 @@ const CARDS = [
     ]
   }
 ];
-
-let idx = 0;
-let fontSize = 23;
-let timerSec = 0;
-let timerId = null;
-
-const stage = document.getElementById('stage');
-const cardEl = document.getElementById('card');
-const pillsEl = document.getElementById('pills');
-const badgeEl = document.getElementById('slide-badge');
-const prevBtn = document.getElementById('prev-btn');
-const nextBtn = document.getElementById('next-btn');
-const timerBtn = document.getElementById('timer-btn');
-
-CARDS.forEach((c, i) => {
-  const b = document.createElement('button');
-  b.type = 'button';
-  b.className = 'pill';
-  b.textContent = String(c.slide).padStart(2, '0');
-  b.addEventListener('click', () => go(i));
-  pillsEl.appendChild(b);
-});
-
-function render() {
-  const c = CARDS[idx];
-  badgeEl.textContent = `${String(c.slide).padStart(2, '0')} / ${String(CARDS.length).padStart(2, '0')}`;
-  Array.from(pillsEl.children).forEach((el, i) => el.classList.toggle('active', i === idx));
-  prevBtn.disabled = idx === 0;
-  nextBtn.disabled = idx === CARDS.length - 1;
-  nextBtn.textContent = idx === CARDS.length - 1 ? "完成 · 交棒 ✓" : "下一张 →";
-
-  const cueBlock = c.cueHtml
-    ? `<div class="cue">${c.cueHtml}</div>`
-    : `<div class="cue"><span class="cue-label">画面与节奏提示</span>${c.cue}</div>`;
-
-  const paras = c.paragraphs.map(p =>
-    `<p class="${p.focus ? 'focus' : ''}">${p.text}</p>`
-  ).join('');
-
-  cardEl.innerHTML = `
-    <div class="card-head">
-      <h1 class="card-title">${c.title}</h1>
-      <span class="card-time">${c.time}</span>
-    </div>
-    ${cueBlock}
-    <div class="script">${paras}</div>
-  `;
-  stage.scrollTop = 0;
-}
-
-function go(nextIdx) {
-  idx = Math.max(0, Math.min(CARDS.length - 1, nextIdx));
-  render();
-}
-
-prevBtn.addEventListener('click', () => go(idx - 1));
-nextBtn.addEventListener('click', () => go(idx + 1));
-
-let touchX = 0, touchY = 0;
-stage.addEventListener('touchstart', e => {
-  touchX = e.changedTouches[0].clientX;
-  touchY = e.changedTouches[0].clientY;
-}, { passive: true });
-stage.addEventListener('touchend', e => {
-  const dx = e.changedTouches[0].clientX - touchX;
-  const dy = e.changedTouches[0].clientY - touchY;
-  if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.35) {
-    if (dx < 0 && idx < CARDS.length - 1) go(idx + 1);
-    else if (dx > 0 && idx > 0) go(idx - 1);
+/* CORE START */
+const ReaderCore = (() => {
+  const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
+  const number = (n, fallback) => typeof n === 'number' && Number.isFinite(n) ? n : fallback;
+  const formatTime = ms => {
+    const s = Math.floor(Math.max(0, ms) / 1000);
+    return `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`;
+  };
+  const elapsed = (timer, now) => timer.elapsed + (timer.startedAt === null ? 0 : Math.max(0, now - timer.startedAt));
+  const nextScroll = (top, height, total) => Math.min(Math.max(0, total - height), top + height * .72);
+  function restore(saved, count) {
+    const s = saved && typeof saved === 'object' ? saved : {};
+    const timer = s.timer && typeof s.timer === 'object' ? s.timer : {};
+    return {
+      slide: Math.floor(clamp(number(s.slide, 0), 0, count - 1)),
+      font: clamp(number(s.font, 28), 22, 36),
+      theme: s.theme === 'light' ? 'light' : 'dark',
+      positions: Array.from({length: count}, (_, i) => {
+        const p = Array.isArray(s.positions) ? s.positions[i] : null;
+        return {paragraph: p && Number.isInteger(p.paragraph) ? Math.max(0, p.paragraph) : 0,
+          ratio: clamp(number(p?.ratio, 0), 0, 1)};
+      }),
+      timer: {elapsed: Math.max(0, number(timer.elapsed, 0)),
+        startedAt: typeof timer.startedAt === 'number' && Number.isFinite(timer.startedAt) ? timer.startedAt : null}
+    };
   }
-}, { passive: true });
+  return {clamp, formatTime, elapsed, nextScroll, restore};
+})();
+/* CORE END */
+const STORAGE_KEY = 'brandlex-speaker-v2';
+const SHORT_TITLES = ['开场故事', '本土化差异', '三个核心特性', '实机演示', '技术架构', '数据与交棒'];
+const $ = id => document.getElementById(id);
+const stage = $('stage');
+const settings = $('settings-dialog');
+const pages = $('pages-dialog');
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+let storageUnavailable = false;
+let state = loadState();
+let paragraphs = [];
+let activeParagraph = 0;
+let restoring = false;
+let completed = false;
+let toastTimeout, saveTimeout, resizeTimeout;
+let wakeLock = null;
+let wakePending = false;
+let wakeGeneration = 0;
 
-document.addEventListener('keydown', e => {
-  if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); go(idx + 1); }
-  if (e.key === 'ArrowLeft') { e.preventDefault(); go(idx - 1); }
-});
-
-function setFont(sz) {
-  fontSize = Math.max(18, Math.min(34, sz));
-  document.documentElement.style.setProperty('--font-size', fontSize + 'px');
+function notify(message) {
+  clearTimeout(toastTimeout);
+  $('toast').textContent = message;
+  toastTimeout = setTimeout(() => { $('toast').textContent = ''; }, 3800);
 }
-document.getElementById('font-down').addEventListener('click', () => setFont(fontSize - 2));
-document.getElementById('font-up').addEventListener('click', () => setFont(fontSize + 2));
-
-const themeBtn = document.getElementById('theme-btn');
-themeBtn.addEventListener('click', () => {
-  const isLight = document.body.classList.toggle('light');
-  themeBtn.textContent = isLight ? '☾' : '☀︎';
-});
-
-function fmt(s) {
-  return `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`;
+function loadState() {
+  try { return ReaderCore.restore(JSON.parse(localStorage.getItem(STORAGE_KEY)), CARDS.length); }
+  catch (error) { storageUnavailable = true; return ReaderCore.restore(null, CARDS.length); }
 }
-let lastTap = 0;
-timerBtn.addEventListener('click', () => {
-  const now = Date.now();
-  if (now - lastTap < 350) {
-    clearInterval(timerId); timerId = null; timerSec = 0;
-    timerBtn.classList.remove('running');
-    timerBtn.textContent = '▶ 00:00';
-    lastTap = 0;
-    return;
+function persist() {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+  catch (error) {
+    if (!storageUnavailable) notify('浏览器未能保存进度；本次仍可正常阅读');
+    storageUnavailable = true;
   }
-  lastTap = now;
-  if (timerId) {
-    clearInterval(timerId); timerId = null;
-    timerBtn.classList.remove('running');
-    timerBtn.textContent = `▶ ${fmt(timerSec)}`;
-  } else {
-    timerBtn.classList.add('running');
-    timerBtn.textContent = `⏸ ${fmt(timerSec)}`;
-    timerId = setInterval(() => {
-      timerSec += 1;
-      timerBtn.textContent = `⏸ ${fmt(timerSec)}`;
-    }, 1000);
+}
+function updateState(patch) { state = {...state, ...patch}; persist(); }
+function buildOutline(target) {
+  CARDS.forEach((card, i) => {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.innerHTML = `<span class="num">${String(i + 1).padStart(2, '0')}</span><span>${SHORT_TITLES[i]}</span>`;
+    button.addEventListener('click', () => { go(i); if (pages.open) pages.close(); });
+    target.appendChild(button);
+  });
+}
+function paragraphTop(p) { return p.getBoundingClientRect().top - stage.getBoundingClientRect().top + stage.scrollTop; }
+function savePosition() {
+  if (restoring || !paragraphs.length) return;
+  const marker = stage.scrollTop + 20;
+  let index = paragraphs.findIndex(p => paragraphTop(p) + p.getBoundingClientRect().height > marker);
+  if (index < 0) index = paragraphs.length - 1;
+  const p = paragraphs[index];
+  const position = {paragraph: index, ratio: ReaderCore.clamp((marker - paragraphTop(p)) / Math.max(1, p.getBoundingClientRect().height), 0, 1)};
+  updateState({positions: state.positions.map((old, i) => i === state.slide ? position : old)});
+}
+function restorePosition() {
+  const pos = state.positions[state.slide];
+  const p = paragraphs[Math.min(pos.paragraph, paragraphs.length - 1)];
+  stage.scrollTop = Math.max(0, paragraphTop(p) + p.getBoundingClientRect().height * pos.ratio - 20);
+  requestAnimationFrame(() => { restoring = false; updateProgress(); });
+}
+function renderCard() {
+  restoring = true;
+  const card = CARDS[state.slide];
+  const badge = `${String(state.slide + 1).padStart(2, '0')} / ${String(CARDS.length).padStart(2, '0')}`;
+  $('slide-badge').textContent = badge;
+  $('mobile-page').textContent = badge;
+  $('card-title').textContent = card.title;
+  $('card-time').textContent = card.time;
+  const cue = card.cueHtml || card.cue;
+  $('desktop-cue').innerHTML = cue;
+  $('mobile-cue-content').innerHTML = cue;
+  $('mobile-cue').open = false;
+  $('script').innerHTML = card.paragraphs.map((p, i) => `<p class="paragraph${p.focus ? ' focus' : ''}" data-number="${String(i + 1).padStart(2, '0')}" data-paragraph="${i}">${p.text}</p>`).join('') + `<div class="end-note">${state.slide === CARDS.length - 1 ? '本张读完，微笑看向下一位同学，自然交棒。' : `本张结束 · 下一张：${SHORT_TITLES[state.slide + 1]}`}</div>`;
+  paragraphs = [...document.querySelectorAll('.paragraph')];
+  for (const nav of [$('outline'), $('mobile-outline')]) {
+    [...nav.children].forEach((button, i) => {
+      if (i === state.slide) button.setAttribute('aria-current', 'step');
+      else button.removeAttribute('aria-current');
+    });
   }
-});
-
-async function keepAwake() {
+  $('prev-btn').disabled = state.slide === 0;
+  $('page-announcement').textContent = `第 ${state.slide + 1} 张，${card.title}`;
+  requestAnimationFrame(restorePosition);
+}
+function markParagraph(index) {
+  activeParagraph = index;
+  paragraphs.forEach((p, i) => p.classList.toggle('current', i === index));
+  $('paragraph-count').textContent = `第 ${index + 1} / ${paragraphs.length} 段`;
+}
+function updateProgress() {
+  const max = Math.max(0, stage.scrollHeight - stage.clientHeight);
+  const percent = max ? Math.round(stage.scrollTop / max * 100) : 100;
+  $('read-progress').style.transform = `scaleX(${percent / 100})`;
+  $('read-label').textContent = `本张进度 ${percent}%`;
+  const line = stage.getBoundingClientRect().top + 24;
+  let index = paragraphs.findIndex(p => p.getBoundingClientRect().bottom > line);
+  if (index < 0) index = paragraphs.length - 1;
+  markParagraph(Math.max(0, index));
+  const end = max - stage.scrollTop < 4;
+  $('continue-label').textContent = completed ? '演讲已结束' : !end ? '继续读' : state.slide < CARDS.length - 1 ? '下一张' : '完成演讲';
+  $('continue-icon').setAttribute('d', end ? 'M4 12h16m-6-6 6 6-6 6' : 'M12 4v16m-6-6 6 6 6-6');
+  $('continue-btn').disabled = completed;
+}
+function go(index) {
+  if (index < 0 || index >= CARDS.length || index === state.slide) return;
+  clearTimeout(saveTimeout);
+  savePosition();
+  updateState({slide: index});
+  completed = false;
+  renderCard();
+}
+function scrollReader(top) {
+  stage.scrollTo({top, behavior: reducedMotion.matches ? 'instant' : 'smooth'});
+}
+function continueReading() {
+  const top = ReaderCore.nextScroll(stage.scrollTop, stage.clientHeight, stage.scrollHeight);
+  if (top - stage.scrollTop > 4) { scrollReader(top); return; }
+  if (state.slide < CARDS.length - 1) go(state.slide + 1);
+  else {
+    if (state.timer.startedAt !== null) toggleTimer();
+    completed = true;
+    updateProgress();
+    notify('演讲结束，接下来交给下一位同学');
+  }
+}
+function applyAppearance() {
+  document.body.classList.toggle('light', state.theme === 'light');
+  document.documentElement.style.setProperty('--font-size', state.font + 'px');
+  document.querySelector('meta[name="theme-color"]').content = state.theme === 'light' ? '#faf9f5' : '#141615';
+  $('font-value').textContent = state.font + ' px';
+  $('font-down').disabled = state.font <= 22;
+  $('font-up').disabled = state.font >= 36;
+  $('dark-theme').setAttribute('aria-pressed', String(state.theme === 'dark'));
+  $('light-theme').setAttribute('aria-pressed', String(state.theme === 'light'));
+}
+function setFont(delta) {
+  savePosition();
+  updateState({font: ReaderCore.clamp(state.font + delta, 22, 36)});
+  restoring = true;
+  applyAppearance();
+  requestAnimationFrame(restorePosition);
+}
+function setTheme(theme) { updateState({theme}); applyAppearance(); }
+function renderTimer() {
+  const elapsed = ReaderCore.elapsed(state.timer, Date.now());
+  const running = state.timer.startedAt !== null;
+  $('timer-value').textContent = ReaderCore.formatTime(elapsed);
+  $('timer-btn').classList.toggle('running', running);
+  $('timer-btn').setAttribute('aria-label', (running ? '暂停计时，已用' : '开始演讲计时，已用') + ReaderCore.formatTime(elapsed));
+  $('timer-icon').innerHTML = running ? '<path d="M8 5v14M16 5v14"/>' : '<path d="m9 5 10 7-10 7Z"/>';
+  $('clock-goal').textContent = elapsed === 0 ? '目标 05:30' : elapsed > 330000 ? `已超时 ${ReaderCore.formatTime(elapsed - 330000)}` : `剩余 ${ReaderCore.formatTime(330000 - elapsed)}`;
+}
+function toggleTimer() {
+  const running = state.timer.startedAt !== null;
+  updateState({timer: {elapsed: ReaderCore.elapsed(state.timer, Date.now()), startedAt: running ? null : Date.now()}});
+  completed = false;
+  renderTimer();
+  updateProgress();
+  if (running) releaseWakeLock(); else requestWakeLock();
+}
+function wakeStatus(text, active) {
+  $('awake-status').textContent = text;
+  $('awake-dot').classList.toggle('on', active);
+}
+async function requestWakeLock() {
+  if (state.timer.startedAt === null || document.visibilityState !== 'visible' || wakeLock || wakePending) return;
+  if (!('wakeLock' in navigator)) { wakeStatus('请在系统设置延长锁屏时间', false); return; }
+  const generation = ++wakeGeneration;
+  wakePending = true;
   try {
-    if ('wakeLock' in navigator) await navigator.wakeLock.request('screen');
-  } catch (_) {}
+    const lock = await navigator.wakeLock.request('screen');
+    if (generation !== wakeGeneration || state.timer.startedAt === null || document.visibilityState !== 'visible' || lock.released) {
+      if (!lock.released) await lock.release();
+      return;
+    }
+    wakeLock = lock;
+    wakeStatus('演讲中 · 屏幕保持亮起', true);
+    lock.addEventListener('release', () => {
+      if (wakeLock !== lock) return;
+      wakeLock = null;
+      wakeStatus(state.timer.startedAt === null ? '计时已暂停' : '亮屏已释放', false);
+      if (state.timer.startedAt !== null && document.visibilityState === 'visible') requestWakeLock();
+    });
+  } catch (error) {
+    if (generation === wakeGeneration) wakeStatus('未能保持亮屏，请检查自动锁定', false);
+  } finally {
+    if (generation === wakeGeneration) wakePending = false;
+  }
 }
-document.addEventListener('visibilitychange', () => {
-  if (document.visibilityState === 'visible') keepAwake();
+async function releaseWakeLock() {
+  ++wakeGeneration;
+  wakePending = false;
+  const previous = wakeLock;
+  wakeLock = null;
+  try { if (previous && !previous.released) await previous.release(); }
+  catch (error) { wakeStatus('请检查系统自动锁定', false); }
+  if (state.timer.startedAt === null) wakeStatus('计时已暂停', false);
+  else requestWakeLock();
+}
+function openDialog(dialog) { savePosition(); dialog.showModal(); }
+function confirmReset(button, action) {
+  if (button.dataset.confirming === 'yes') {
+    action(); button.dataset.confirming = ''; button.textContent = button.dataset.label;
+  } else {
+    button.dataset.label = button.textContent;
+    button.dataset.confirming = 'yes'; button.textContent = '再次点击确认';
+    setTimeout(() => { button.dataset.confirming = ''; button.textContent = button.dataset.label; }, 3500);
+  }
+}
+$('continue-btn').addEventListener('click', continueReading);
+$('prev-btn').addEventListener('click', () => go(state.slide - 1));
+$('settings-btn').addEventListener('click', () => openDialog(settings));
+$('pages-btn').addEventListener('click', () => openDialog(pages));
+$('font-down').addEventListener('click', () => setFont(-2));
+$('font-up').addEventListener('click', () => setFont(2));
+$('dark-theme').addEventListener('click', () => setTheme('dark'));
+$('light-theme').addEventListener('click', () => setTheme('light'));
+$('timer-btn').addEventListener('click', toggleTimer);
+$('reset-timer').addEventListener('click', event => confirmReset(event.currentTarget, () => {
+  updateState({timer:{elapsed:0,startedAt:null}}); renderTimer(); releaseWakeLock();
+}));
+$('start-over').addEventListener('click', event => confirmReset(event.currentTarget, () => {
+  clearTimeout(saveTimeout);
+  updateState({slide:0,positions:CARDS.map(() => ({paragraph:0,ratio:0})),timer:{elapsed:0,startedAt:null}});
+  completed = false; renderCard(); renderTimer(); releaseWakeLock(); settings.close();
+}));
+document.querySelectorAll('[data-close]').forEach(button => button.addEventListener('click', () => $(button.dataset.close).close()));
+stage.addEventListener('scroll', () => {
+  if (restoring) return;
+  updateProgress(); clearTimeout(saveTimeout); saveTimeout = setTimeout(savePosition, 180);
+}, {passive:true});
+$('script').addEventListener('click', event => {
+  const p = event.target.closest('.paragraph');
+  if (!p) return;
+  markParagraph(Number(p.dataset.paragraph));
+  scrollReader(Math.max(0, paragraphTop(p) - 20));
 });
-keepAwake();
+document.addEventListener('keydown', event => {
+  if (settings.open || pages.open || event.target.closest('button, input, a, summary')) return;
+  if (event.key === 'ArrowRight') { event.preventDefault(); go(state.slide + 1); }
+  else if (event.key === 'ArrowLeft') { event.preventDefault(); go(state.slide - 1); }
+  else if (event.key === ' ' || event.key === 'PageDown') { event.preventDefault(); continueReading(); }
+});
+window.addEventListener('resize', () => {
+  restoring = true; clearTimeout(saveTimeout); clearTimeout(resizeTimeout);
+  resizeTimeout = setTimeout(restorePosition, 160);
+});
+window.addEventListener('pagehide', () => { savePosition(); persist(); });
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'hidden') { savePosition(); persist(); }
+  else { renderTimer(); requestWakeLock(); }
+});
+settings.addEventListener('close', () => requestAnimationFrame(restorePosition));
+buildOutline($('outline'));
+buildOutline($('mobile-outline'));
+applyAppearance();
+renderCard();
+renderTimer();
+setInterval(renderTimer, 500);
+if (state.timer.startedAt !== null) requestWakeLock();
+if (storageUnavailable) notify('浏览器未能读取保存记录，已从第一张开始');
 
-render();
 </script>
 </body>
 </html>
